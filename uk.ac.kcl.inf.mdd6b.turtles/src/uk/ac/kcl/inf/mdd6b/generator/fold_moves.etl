@@ -1,0 +1,102 @@
+// TODO: Adjust the rules below (which come from the copy transformation) to implement statement folding for MoveStatements.
+
+rule CopyProgram 
+	transform s : Source!TurtleProgram
+	to t : Target!TurtleProgram {
+	
+	t.statements ::= s.statements;
+}
+
+rule CopyPenMoveStatement 
+	transform s : Source!PenMoveStatement
+	to t : Target!PenMoveStatement {
+	t.state = s.state.toTargetPenState();
+}
+
+rule CopyVariableDeclaration 
+	transform s : Source!VariableDeclaration
+	to t : Target!VariableDeclaration {
+	t.name = s.name;
+	t.value = s.value;
+}
+
+rule CopyLoopStatement 
+	transform s : Source!LoopStatement
+	to t : Target!LoopStatement {
+	t.count ::= s.count;
+	t.statements ::= s.statements;
+}
+
+rule CopyMoveStatement 
+	transform s : Source!MoveStatement
+	to t : Target!MoveStatement {
+	t.command = s.command.toTargetMoveCommand();
+	t.steps ::= s.steps;
+}
+
+rule CopyTurnStatement 
+	transform s : Source!TurnStatement
+	to t : Target!TurnStatement {
+	t.command = s.command.toTargetTurnCommand();
+	t.degrees ::= s.degrees;
+}
+
+rule CopyIntLiteral 
+	transform s : Source!IntLiteral
+	to t : Target!IntLiteral {
+	t.val = s.val;
+}
+
+rule CopyRealLiteral
+	transform s : Source!RealLiteral
+	to t : Target!RealLiteral {
+	t.val = s.val;
+}
+
+rule CopyIntVarExpression 
+	transform s : Source!IntVarExpression
+	to t : Target!IntVarExpression {
+	t.`var` ::= s.`var`;
+}
+
+rule CopyAddition
+	transform s : Source!Addition
+	to t : Target!Addition {
+	
+	t.left ::= s.left;
+	t.operator = s.operator;
+	t.right ::= s.right;
+}
+
+rule CopyMultiplication
+	transform s : Source!Multiplication
+	to t : Target!Multiplication {
+	
+	t.left ::= s.left;
+	t.operator = s.operator;
+	t.right ::= s.right;
+}
+
+// Use this operation to translate pen states. For example if s is a PenMoveStatement you could write s.state.toTargetPenState() to generate the corresponding pen state in the target model.
+operation Any toTargetPenState() {
+    switch (self) {
+        case Source!PenState#up: return Target!PenState#up;
+        case Source!PenState#down: return Target!PenState#down;
+    }
+}
+
+// Use this operation to translate move commands. For example if s is a MoveStatement you could write s.command.toTargetMoveCommand() to generate the corresponding move command in the target model.
+operation Any toTargetMoveCommand() {
+    switch (self) {
+        case Source!MoveCommand#forward: return Target!MoveCommand#forward;
+        case Source!MoveCommand#backward: return Target!MoveCommand#backward;
+    }
+}
+
+// Use this operation to translate turn commands. For example if s is a TurnStatement you could write s.command.toTargetTurnCommand() to generate the corresponding turn command in the target model.
+operation Any toTargetTurnCommand() {
+    switch (self) {
+        case Source!TurnCommand#left: return Target!TurnCommand#left;
+        case Source!TurnCommand#right: return Target!TurnCommand#right;
+    }
+}

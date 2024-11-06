@@ -1,0 +1,22 @@
+pen up
+turn right by 90.0 degrees
+forward (5)
+
+pen down 
+
+var loopCounter = 10
+
+(loopCounter + 3) * 7 times do
+//	pen up
+	
+	var stepCount = 10
+
+	turn left by 90.0 + 10 - 5 degrees
+	backward (stepCount)
+	turn right by 20.0 degrees
+	forward (stepCount + 9)
+	forward (9)
+end
+
+forward (15)
+backward (20)

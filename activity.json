@@ -1,0 +1,126 @@
+{
+    "activities": [
+        {
+            "id": "activity-xtext-turtles",
+            "title": "Defining the language",
+            "icon": "xtext",
+
+            "tools": ["https://ep.mde-network.org/tools/xtext/xtext_tool.json"],
+
+            "panels": [
+                {
+                    "id": "panel-xtext",
+                    "name": "Xtext Grammar",
+                    "ref": "xtext-grammar",
+                    "file": "uk.ac.kcl.inf.mdd6b.turtles/src/uk/ac/kcl/inf/mdd6b/Turtles.xtext",
+                    "editorPanel": "panel-turtles",
+                    "editorActivity": "activity-turtles-editor"
+                },
+                {
+                    "id": "panel-console",
+                    "name": "Console",
+                    "ref": "console"
+                }
+            ],
+
+            "layout": {
+                "area": [
+                    ["panel-xtext"],
+                    ["panel-console"]
+                ]
+            },
+
+            "actions": [
+                {
+                    "source": "panel-xtext",
+                    "sourceButton": "action-button",
+
+                    "parameters": {
+                        "languageName": "uk.ac.kcl.inf.mdd6b.turtles.Turtles",
+                        "baseName": "uk.ac.kcl.inf.mdd6b.turtles",
+                        "extension": "turtles",
+                        "grammar": "panel-xtext"
+                    },
+
+                    "output": "panel-console"
+                }
+            ]
+        },
+        {
+            "id": "activity-turtles-editor",
+            "title": "Turtles Editor",
+            "icon": "xtext",
+
+            "tools": ["{{ID-panel-turtles}}/editor_tool.json", 
+                      "https://ep.mde-network.org/tools/emf/emf_tool.json",
+                      "https://ep.mde-network.org/tools/emfatic/emfatic_tool.json",
+                      "https://ep.mde-network.org/tools/epsilon/tools"],
+
+            "panels": [
+                {
+                    "id": "panel-turtles",
+                    "name": "Try out your language here",
+                    "ref": "xtext-editor",
+                    "file": "example/test.turtles",
+                    "extension": "turtles",
+                    "buttons": [
+                        {
+                            "ref": "to-diagram-button"
+                        }
+                    ]
+                },
+                {
+                    "id": "panel-diagram",
+                    "name": "Model/Metamodel Diagram",
+                    "ref": "emfgraph",
+                    "buttons": [
+                        {
+                            "id": "button-generate-mm-diagram",
+                            "actionfunction": "function-ecoretodiagram",
+                            "hint": "Show meta-model diagram",
+                            "icon": "diagram-generate"                            
+                        }
+                    ]
+                },
+                {
+                    "id": "panel-mm",
+                    "name": "Ecore text format",
+                    "ref": "ecore",
+                    "file": "{{ID-panel-turtles}}/xtext-resources/generated/meta-model.ecore"
+                }
+            ],
+
+            "layout": {
+                "area": [
+                    ["panel-turtles", "panel-diagram"]
+                ]
+            },
+
+            "actions": [
+                {
+                    "source": "panel-diagram",
+                    "sourceButton": "button-generate-mm-diagram",
+
+                    "parameters": {
+                        "language": "generated",
+                        "emfatic": "panel-mm"
+                    },
+
+                    "output": "panel-diagram"
+                },
+                {
+                    "source": "panel-turtles",
+                    "sourceButton": "to-diagram-button",
+
+                    "parameters": {
+                        "input": "panel-turtles",
+                        "language": "xtext-generated"
+                    },
+
+                    "output": "panel-diagram"
+
+                }
+            ]
+        }
+    ]
+}

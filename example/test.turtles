@@ -1,0 +1,9 @@
+forward(100)
+
+backward(10)
+
+10 times do
+  turn right by 99.8 degrees
+  
+  pen down
+end

@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: uk.ac.kcl.inf.mdd6b.turtles.tests
+Bundle-ManifestVersion: 2
+Bundle-Name: uk.ac.kcl.inf.mdd6b.turtles.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: uk.ac.kcl.inf.mdd6b.turtles.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: uk.ac.kcl.inf.mdd6b.turtles,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ uk.ac.kcl.inf.mdd6b.turtles.ui;bundle-version="1.0.0",
+ org.eclipse.xpect.xtext.lib;bundle-version="0.2.0",
+ org.eclipse.epsilon.etl.dt;bundle-version="2.4.0",
+ org.eclipse.epsilon.etl.engine;bundle-version="2.4.0",
+ org.eclipse.epsilon.emc.emf;bundle-version="2.4.0",
+ junit-jupiter-api;bundle-version="5.9.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: uk.ac.kcl.inf.mdd6b.tests.etl,
+ uk.ac.kcl.inf.mdd6b.tests;x-internal=true
