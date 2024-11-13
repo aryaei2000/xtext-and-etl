@@ -37,7 +37,7 @@
 
                     "parameters": {
                         "languageName": "uk.ac.kcl.inf.mdd6b.turtles.Turtles",
-                        "baseName": "uk.ac.kcl.inf.mdd6b.turtles.foo",
+                        "baseName": "uk.ac.kcl.inf.mdd6b.turtles",
                         "extension": "turtles",
                         "grammar": "panel-xtext"
                     },
